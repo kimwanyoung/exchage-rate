@@ -19,7 +19,6 @@
     "@apollo/subgraph": "^2.2.1",
     "apollo-server": "^3.11.1",
     "graphql": "^16.6.0",
-    "graphql-tag": "^2.12.6",
     "mongoose": "^6.7.5"
   }
 }
