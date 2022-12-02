@@ -3,11 +3,12 @@
 ### 테스트 방법
 
 ```bash
+npm install nodemon
 npm install
 npm start
 ```
 ### 구현한 기능
-  - **환율 정보 조회 - getExchangeRate(src: String, tgt: String)**
+  - **환율 정보 조회 - getExchangeRate(src: String!, tgt: String!)**
   - **환율 정보 전부 조회 - getExchangeRates(amount: Int!)**
   - **데이터 생성 - createExchangeRate(info: InputUpdateExchangeInfo)**
   - **환율 정보 upsert - postExchangeRate(info: InputUpdateExchangeInfo)**
