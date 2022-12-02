@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 module.exports = gql`
     type Query {
         getExchangeRate(src: String!, tgt: String!): ExchangeInfo
-        getExchangeRates(amount: Int): [ExchangeInfo]
+        getExchangeRates(amount: Int!): [ExchangeInfo]
     }
 
     type Mutation {
