@@ -3,9 +3,15 @@
 ### 테스트 방법
 
 ```bash
+# exchangerate-server 폴더
 npm install nodemon
 npm install
 npm start
+
+# exchange-client 폴더
+npm install
+npm start
+# apollo-server와 client 서버 모두 실행 후 http://localhost:3000 접속
 ```
 ### 구현한 기능
   - **환율 정보 조회 - getExchangeRate(src: String!, tgt: String!)**
