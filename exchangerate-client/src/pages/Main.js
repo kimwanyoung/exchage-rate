@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import ContentBox from "../components/ContentBox";
 import sampleData from "../mocks/sampleData";
+import ModifyModal from "../components/ModifyModal";
 
 const GET_EXCHANGE_RATE_ALL = gql`
     query getExchangeRates($amount: Int!) {
@@ -29,6 +30,13 @@ const CREATE_EXCHANGE_RATE = gql`
 let refetcher;
 
 const Main = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalData, setModalData] = useState({
+        src:"",
+        tgt: "",
+        rate: "",
+        date: "",
+    });
     const { loading, error, data, refetch } = useQuery(GET_EXCHANGE_RATE_ALL, {
         variables: { amount: 100 },
     });
@@ -51,6 +59,7 @@ const Main = () => {
 
     return (
         <MainWrapper>
+            {modalOpen && <ModifyModal {...modalData} setModalOpen={setModalOpen}/>}
             <CreateTestDataBtn onClick={handleCreateTestData}>
                 Create Test Data
             </CreateTestDataBtn>
@@ -63,7 +72,7 @@ const Main = () => {
                 </MainTitle>
                 <ContentBoxWrapper>
                 {data.getExchangeRates.map((props, idx) => (
-                    <ContentBox {...props} key={idx} />
+                    <ContentBox {...props} key={idx} setModalData={setModalData} setModalOpen={setModalOpen}/>
                 ))}
                 </ContentBoxWrapper>
             </MainContentBox>
@@ -77,6 +86,7 @@ export function dataRefetch() {
 export default Main;
 
 const MainWrapper = styled.section`
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;

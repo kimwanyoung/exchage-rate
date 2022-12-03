@@ -13,15 +13,10 @@ const DELETE_EXCHANGE_RATE = gql`
     }
 `;
 
-
-const ContentBox = ({ src, tgt, date, rate }) => {
-    const [deleteExchangeRate] = useMutation(
-        DELETE_EXCHANGE_RATE,
-        {
-            onCompleted: () => alert("삭제되었습니다."),
-        }
-        
-    );
+const ContentBox = ({ src, tgt, date, rate, setModalData, setModalOpen }) => {
+    const [deleteExchangeRate] = useMutation(DELETE_EXCHANGE_RATE, {
+        onCompleted: () => alert("삭제되었습니다."),
+    });
 
     const handleDeleteExchangeRate = () => {
         deleteExchangeRate({
@@ -34,9 +29,29 @@ const ContentBox = ({ src, tgt, date, rate }) => {
         <BoxWrapper>
             <DataField size={15}>{src}</DataField>
             <DataField size={15}>{tgt}</DataField>
-            <DataField size={25}>{rate}</DataField>
-            <DataField size={25}>{date}</DataField>
-            <DeleteBtn onClick={handleDeleteExchangeRate}>Delete</DeleteBtn>
+            <DataField size={20}>{rate}</DataField>
+            <DataField size={20}>{date}</DataField>
+            <ExeBtn
+                color="178, 105, 224"
+                onClick={() => {
+                    setModalData((prev) => {
+                        let newModalData = { ...prev };
+                        newModalData = {
+                            src: src,
+                            tgt: tgt,
+                            rate: rate,
+                            date: date,
+                        };
+                        return newModalData;
+                    });
+                    setModalOpen(true);
+                }}
+            >
+                Modify
+            </ExeBtn>
+            <ExeBtn color="224, 105, 145" onClick={handleDeleteExchangeRate}>
+                Delete
+            </ExeBtn>
         </BoxWrapper>
     );
 };
@@ -50,8 +65,8 @@ const BoxWrapper = styled.div`
     width: 100%;
     height: 50px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0.9rem 1rem -20px;
-    :hover{
-      background-color: rgba(0, 0, 0, 0.05);
+    :hover {
+        background-color: rgba(111, 218, 232, 0.5);
     }
 `;
 
@@ -59,15 +74,16 @@ const DataField = styled.p`
     width: ${(props) => props.size}%;
 `;
 
-const DeleteBtn = styled.button`
+const ExeBtn = styled.button`
     width: 10%;
     height: 1.5rem;
-    background-color: rgba(168, 50, 68, 0.5);
+    margin-right: 0.5rem;
+    background-color: rgba(${(prop) => prop.color}, 0.3);
     outline: none;
     border: none;
     color: white;
 
     :hover {
-        background-color: rgba(168, 50, 68, 0.8);
+        background-color: rgba(${(prop) => prop.color}, 0.7);
     }
 `;
