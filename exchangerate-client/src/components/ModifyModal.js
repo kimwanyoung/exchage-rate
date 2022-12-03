@@ -17,12 +17,18 @@ const POST_EXCHANGE_RATE = gql`
 const ModifyModal = ({ src, tgt, rate, date, setModalOpen }) => {
     const [modifyRate, setModifyRate] = useState(rate);
     const [postExchangeRate] = useMutation(POST_EXCHANGE_RATE, {
-        onCompleted: () => alert("수정하였습니다 !"),
+        onCompleted: () => {
+            dataRefetch();
+            alert("수정하였습니다 !");
+        },
     });
 
     const handleModifyExchangeInfo = () => {
-        postExchangeRate({ variables: { info: { src:src, tgt:tgt, rate: modifyRate, date:date } } });
-        dataRefetch();
+        postExchangeRate({
+            variables: {
+                info: { src: src, tgt: tgt, rate: modifyRate, date: date },
+            },
+        });
         setModalOpen(false);
     };
     return (
@@ -35,15 +41,21 @@ const ModifyModal = ({ src, tgt, rate, date, setModalOpen }) => {
                     <Title>Rate</Title>
                     <Title>Date</Title>
                 </InputWrapper>
-                <InputWrapper >
+                <InputWrapper>
                     <Title>{src}</Title>
                     <Title>{tgt}</Title>
-                    <InputRate onChange={(e) => {
-                      setModifyRate(e.target.value * 1);
-                    }} defaultValue={rate}/>
+                    <InputRate
+                        onChange={(e) => {
+                            setModifyRate(e.target.value * 1);
+                        }}
+                        defaultValue={rate}
+                    />
                     <Title>{date}</Title>
                 </InputWrapper>
-                <ModifyBtn onClick={handleModifyExchangeInfo}> 수정하기 !</ModifyBtn>
+                <ModifyBtn onClick={handleModifyExchangeInfo}>
+                    {" "}
+                    수정하기 !
+                </ModifyBtn>
             </ModalContent>
         </ModalWrapper>
     );
@@ -97,15 +109,15 @@ const InputRate = styled.input`
     height: 1rem;
 `;
 
-const ModifyBtn = styled.button`  
-  width: 100%;
-  height: 3rem;
-  border: none;
-  outline:none;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: rgba(114, 230, 232, 0.5);
-  :hover{
-    background-color: rgba(114, 230, 232, 0.8);
-  }
-`
+const ModifyBtn = styled.button`
+    width: 100%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: rgba(114, 230, 232, 0.5);
+    :hover {
+        background-color: rgba(114, 230, 232, 0.8);
+    }
+`;

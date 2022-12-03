@@ -42,16 +42,16 @@ const Main = () => {
     });
     refetcher = refetch;
 
-    const [createExchangeRate] = useMutation(CREATE_EXCHANGE_RATE, () => {
-        alert("테스트 데이터 생성 성공!");
+    const [createExchangeRate] = useMutation(CREATE_EXCHANGE_RATE, {
+        onCompleted: refetcher()
     });
     const handleCreateTestData = () => {
-        sampleData.forEach(({ src, tgt, rate, date }) =>
+        sampleData.forEach(({ src, tgt, rate, date }) => {
             createExchangeRate({
                 variables: { info: { src, tgt, rate, date } },
-            })
-        );
-        refetcher();
+            });
+        });
+        alert('테스트 데이터 생성 완료!');
     };
 
     if (loading) return <p>Loading...</p>;
