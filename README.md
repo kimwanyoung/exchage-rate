@@ -20,6 +20,7 @@ npm start
   - **환율 정보 upsert - postExchangeRate(info: InputUpdateExchangeInfo)**
   - **환율 정보 삭제 - deleteExchangeRate(info: InputDeleteExchangeInfo)**
   - **클라이언트에서도 구현 완료 !!**
+  - ![클라이언트 테스트 이미지](https://velog.velcdn.com/images/kimwanyoung/post/6560758a-270b-40af-9291-63d67c48c437/image.gif)
 
 ### 테스트 스크립트
 ```bash
