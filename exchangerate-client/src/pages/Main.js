@@ -32,7 +32,7 @@ let refetcher;
 const Main = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState({
-        src:"",
+        src: "",
         tgt: "",
         rate: "",
         date: "",
@@ -59,7 +59,9 @@ const Main = () => {
 
     return (
         <MainWrapper>
-            {modalOpen && <ModifyModal {...modalData} setModalOpen={setModalOpen}/>}
+            {modalOpen && (
+                <ModifyModal {...modalData} setModalOpen={setModalOpen} />
+            )}
             <CreateTestDataBtn onClick={handleCreateTestData}>
                 Create Test Data
             </CreateTestDataBtn>
@@ -71,9 +73,14 @@ const Main = () => {
                     <DataField size={25}>Date</DataField>
                 </MainTitle>
                 <ContentBoxWrapper>
-                {data.getExchangeRates.map((props, idx) => (
-                    <ContentBox {...props} key={idx} setModalData={setModalData} setModalOpen={setModalOpen}/>
-                ))}
+                    {data.getExchangeRates.map((props, idx) => (
+                        <ContentBox
+                            {...props}
+                            key={idx}
+                            setModalData={setModalData}
+                            setModalOpen={setModalOpen}
+                        />
+                    ))}
                 </ContentBoxWrapper>
             </MainContentBox>
         </MainWrapper>
@@ -139,4 +146,4 @@ const CreateTestDataBtn = styled.button`
 const ContentBoxWrapper = styled.div`
     width: 100%;
     height: 100%;
-`
+`;

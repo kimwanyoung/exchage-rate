@@ -15,14 +15,16 @@ const DELETE_EXCHANGE_RATE = gql`
 
 const ContentBox = ({ src, tgt, date, rate, setModalData, setModalOpen }) => {
     const [deleteExchangeRate] = useMutation(DELETE_EXCHANGE_RATE, {
-        onCompleted: () => alert("삭제되었습니다."),
+        onCompleted:  () => {
+          alert('삭제완료 !');
+          dataRefetch();
+        },
     });
 
     const handleDeleteExchangeRate = () => {
         deleteExchangeRate({
             variables: { info: { src: src, tgt: tgt, date: date } },
         });
-        dataRefetch();
     };
 
     return (
