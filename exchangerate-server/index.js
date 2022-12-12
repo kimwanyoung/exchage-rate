@@ -3,7 +3,7 @@ const { buildSubgraphSchema } = require('@apollo/subgraph');
 const { ApolloServer } = require('apollo-server');
 const { mongoose } = require('mongoose');
 
-const MONGO_DB = 'mongodb+srv://wanyoung:12345@exchange.fr091yb.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_DB = '';
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
